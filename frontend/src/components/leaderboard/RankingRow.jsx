@@ -74,7 +74,6 @@ export const RankingRow = ({
               {user.name}
               {isCurrentUser && <span className="ml-2 text-xs text-yellow-700">(You)</span>}
             </p>
-            <p className="text-xs text-neutral-600 truncate">{user.email}</p>
           </div>
         </div>
       </div>
