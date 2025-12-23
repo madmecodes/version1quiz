@@ -61,6 +61,7 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -229,3 +230,6 @@ AUTH_USER_MODEL = 'users.CustomUser'
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': config('ACCESS_TOKEN_LIFETIME', default=3600, cast=int),
 }
+
+# WhiteNoise Configuration - serves static files in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
