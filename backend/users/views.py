@@ -250,3 +250,24 @@ def serve_predefined_avatar(request, filename):
         raise Http404("Avatar not found")
 
     return FileResponse(open(avatar_path, 'rb'), content_type='image/png')
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def serve_user_avatar(request, filename):
+    """Serve user-uploaded avatar files from media volume"""
+    from django.http import FileResponse, Http404
+    from pathlib import Path
+    import mimetypes
+
+    avatar_path = Path(settings.MEDIA_ROOT) / 'avatars' / filename
+
+    if not avatar_path.exists():
+        raise Http404("Avatar not found")
+
+    # Detect content type based on file extension
+    content_type, _ = mimetypes.guess_type(str(avatar_path))
+    if not content_type:
+        content_type = 'application/octet-stream'
+
+    return FileResponse(open(avatar_path, 'rb'), content_type=content_type)

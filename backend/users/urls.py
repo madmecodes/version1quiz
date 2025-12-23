@@ -8,4 +8,5 @@ urlpatterns = [
     path('set-username/', views.set_username, name='set_username'),
     path('available-avatars/', views.available_avatars, name='available_avatars'),
     path('predefined-avatar/<str:filename>', views.serve_predefined_avatar, name='serve_predefined_avatar'),
+    path('user-avatar/<str:filename>', views.serve_user_avatar, name='serve_user_avatar'),
 ]

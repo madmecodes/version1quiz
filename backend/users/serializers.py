@@ -25,7 +25,9 @@ class UserSerializer(serializers.ModelSerializer):
         if obj.avatar:
             request = self.context.get('request')
             if request:
-                return request.build_absolute_uri(obj.avatar.url)
+                # Serve user avatars through API endpoint instead of direct media URL
+                avatar_filename = obj.avatar.name.split('/')[-1]  # Get filename from path
+                return request.build_absolute_uri(f'/api/users/user-avatar/{avatar_filename}')
             return obj.avatar.url
         return None
 
@@ -56,7 +58,7 @@ class UserProfileUpdateSerializer(serializers.ModelSerializer):
             from pathlib import Path
             from django.conf import settings
 
-            predefined_path = Path(settings.MEDIA_ROOT) / 'avatars' / 'predefined' / f'{avatar_id}.png'
+            predefined_path = Path(settings.BASE_DIR) / 'static_assets' / 'avatars' / 'predefined' / f'{avatar_id}.png'
             if predefined_path.exists():
                 user_avatar_filename = f'avatars/{self.instance.id}_predefined_{avatar_id}.png'
                 user_avatar_path = Path(settings.MEDIA_ROOT) / user_avatar_filename
