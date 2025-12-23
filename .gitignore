@@ -90,6 +90,7 @@ backend/venv.bak/
 backend/local_settings.py
 backend/db.sqlite3
 backend/db.sqlite3-journal
+backend/media/
 backend/staticfiles/
 
 # Seed data scripts (local only)
