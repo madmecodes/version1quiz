@@ -197,7 +197,7 @@ def set_username(request):
         from django.core.files.storage import default_storage
         from pathlib import Path
 
-        predefined_path = Path(settings.MEDIA_ROOT) / 'avatars' / 'predefined' / f'{avatar_id}.png'
+        predefined_path = Path(settings.BASE_DIR) / 'static_assets' / 'avatars' / 'predefined' / f'{avatar_id}.png'
         if predefined_path.exists():
             user_avatar_filename = f'avatars/{user.id}_predefined_{avatar_id}.png'
             user_avatar_path = Path(settings.MEDIA_ROOT) / user_avatar_filename
@@ -232,6 +232,21 @@ def available_avatars(request):
 
     # Add full URL to each avatar
     for avatar in avatars:
-        avatar['url'] = request.build_absolute_uri(f'/media/avatars/predefined/{avatar["id"]}.png')
+        avatar['url'] = request.build_absolute_uri(f'/api/users/predefined-avatar/{avatar["id"]}.png')
 
     return Response({'avatars': avatars}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def serve_predefined_avatar(request, filename):
+    """Serve predefined avatar files from static_assets"""
+    from django.http import FileResponse, Http404
+    from pathlib import Path
+
+    avatar_path = Path(settings.BASE_DIR) / 'static_assets' / 'avatars' / 'predefined' / filename
+
+    if not avatar_path.exists():
+        raise Http404("Avatar not found")
+
+    return FileResponse(open(avatar_path, 'rb'), content_type='image/png')
