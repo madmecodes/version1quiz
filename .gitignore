@@ -1,0 +1,144 @@
+# ============================================
+# OS-specific files
+# ============================================
+.DS_Store
+Thumbs.db
+*~
+
+# ============================================
+# IDE and Editor files
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ============================================
+# Environment variables (all workspaces)
+# ============================================
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.test
+
+# ============================================
+# Security & Credentials
+# ============================================
+*.pem
+*.key
+*.crt
+*.p12
+secrets/
+
+# ============================================
+# Logs (all workspaces)
+# ============================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ============================================
+# Backend (Python/Django)
+# ============================================
+# Python bytecode
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.py[cod]
+backend/**/*.py[cod]
+backend/*$py.class
+backend/*.so
+
+# Python distributions
+backend/.Python
+backend/build/
+backend/develop-eggs/
+backend/dist/
+backend/downloads/
+backend/eggs/
+backend/.eggs/
+backend/lib/
+backend/lib64/
+backend/parts/
+backend/sdist/
+backend/var/
+backend/wheels/
+backend/pip-wheel-metadata/
+backend/share/python-wheels/
+backend/*.egg-info/
+backend/.installed.cfg
+backend/*.egg
+backend/MANIFEST
+
+# Virtual environments
+backend/venv/
+backend/env/
+backend/ENV/
+backend/env.bak/
+backend/venv.bak/
+
+# Django specific
+backend/local_settings.py
+backend/db.sqlite3
+backend/db.sqlite3-journal
+backend/media/
+backend/staticfiles/
+
+# Seed data scripts (local only)
+backend/quiz/management/commands/indie_hacking_v1.py
+backend/quiz/management/commands/indie_hacking_v1_part*.py
+
+# Docker
+backend/postgres_data/
+
+# Database files
+backend/*.db
+
+# Testing
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+backend/.tox/
+backend/.nox/
+
+# Celery
+backend/celerybeat-schedule
+backend/celerybeat.pid
+
+# ============================================
+# Frontend (Node/Vite)
+# ============================================
+# Dependencies
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+
+# Testing
+frontend/.nyc_output/
+frontend/coverage/
+
+# ============================================
+# Monorepo specific
+# ============================================
+# Root-level node_modules if using workspace manager
+node_modules/
+
+# Turborepo cache (if added in future)
+.turbo/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
