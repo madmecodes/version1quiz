@@ -93,6 +93,10 @@ backend/db.sqlite3-journal
 backend/media/
 backend/staticfiles/
 
+# Seed data scripts (local only)
+backend/quiz/management/commands/indie_hacking_v1.py
+backend/quiz/management/commands/indie_hacking_v1_part*.py
+
 # Docker
 backend/postgres_data/
 
