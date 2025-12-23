@@ -44,7 +44,9 @@ services:
       retries: 3
     volumes:
       - .:/app
+      - media_data:/app/media
     restart: unless-stopped
 
 volumes:
   postgres_data:
+  media_data:
