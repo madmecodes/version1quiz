@@ -28,8 +28,14 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-n4w$2d4z85g*vu1@1=)0d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lambda v: [s.strip() for s in v.split(',')])
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,version1quiz-production.up.railway.app', cast=lambda v: [s.strip() for s in v.split(',')])
 
+# CSRF Trusted Origins - allows requests from these domains
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='http://localhost:3000,http://localhost:5173,https://version1quiz.vercel.app,https://version1quiz-production.up.railway.app',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
 
 # Application definition
 
