@@ -1,5 +1,5 @@
 import React from 'react';
-import { IoLogoTwitter, IoLogoLinkedin, IoLogoYoutube } from 'react-icons/io5';
+import { IoLogoTwitter, IoLogoLinkedin, IoLogoYoutube, IoLogoGithub } from 'react-icons/io5';
 import v1logo from '../../assets/v1logo.png';
 import profileMadmeCodes from '../../assets/profileMadmeCodes.png';
 
@@ -64,6 +64,17 @@ export const Footer = ({ ...props }) => {
                   style={{ color: '#737373' }}
                 >
                   YouTube Playlist
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/madmecodes/version1quiz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-yellow-700"
+                  style={{ color: '#737373' }}
+                >
+                  GitHub Repository
                 </a>
               </li>
             </ul>
@@ -151,6 +162,39 @@ export const Footer = ({ ...props }) => {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Contribution Section */}
+        <div
+          className="rounded-lg p-4 mb-8"
+          style={{
+            background: 'rgba(255, 215, 0, 0.08)',
+            border: '1px solid rgba(255, 215, 0, 0.3)',
+          }}
+        >
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex-1">
+              <h3 className="font-semibold text-neutral-900 mb-1 flex items-center gap-2">
+                <IoLogoGithub className="w-5 h-5" />
+                Open Source & Community
+              </h3>
+              <p className="text-sm text-neutral-700">
+                Found a bug? Have an idea? Contributions are welcome! Visit our GitHub repository to report issues, suggest features, or contribute code.
+              </p>
+            </div>
+            <a
+              href="https://github.com/madmecodes/version1quiz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-lg font-semibold text-white transition-all whitespace-nowrap"
+              style={{
+                background: 'linear-gradient(to right, #ffd700, #ffc107)',
+                boxShadow: '0 0 10px rgba(255, 215, 0, 0.4)',
+              }}
+            >
+              View on GitHub
+            </a>
           </div>
         </div>
 

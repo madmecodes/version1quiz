@@ -1,10 +1,42 @@
 import React from 'react';
-import { IoLogoYoutube, IoBook, IoBulb, IoCheckmarkCircle, IoRefresh } from 'react-icons/io5';
+import { IoLogoYoutube, IoBook, IoBulb, IoCheckmarkCircle, IoRefresh, IoLogoGithub, IoWarning } from 'react-icons/io5';
 import profileMadmeCodes from '../assets/profileMadmeCodes.png';
 
 export default function About() {
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
+      {/* Open Source Banner */}
+      <div
+        className="rounded-lg p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+        style={{
+          background: 'rgba(79, 172, 254, 0.1)',
+          border: '2px solid rgba(79, 172, 254, 0.4)',
+          boxShadow: '0 2px 8px rgba(79, 172, 254, 0.2)',
+        }}
+      >
+        <div className="flex items-start gap-3 flex-1">
+          <IoWarning className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+          <div>
+            <h3 className="font-semibold text-neutral-900 mb-1">This is an Open Source Project</h3>
+            <p className="text-sm text-neutral-700">
+              Found a bug? Have a feature request? Want to contribute? Visit our GitHub repository to report issues, suggest improvements, or submit pull requests. All contributions are welcome!
+            </p>
+          </div>
+        </div>
+        <a
+          href="https://github.com/madmecodes/version1quiz"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-4 py-2 rounded-lg font-semibold text-white transition-all whitespace-nowrap flex items-center gap-2"
+          style={{
+            background: 'linear-gradient(to right, #000, #333)',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
+          }}
+        >
+          <IoLogoGithub className="w-5 h-5" />
+          GitHub
+        </a>
+      </div>
       {/* What is Version1 - 2 Column Layout */}
       <div
         className="rounded-lg p-6"
@@ -162,19 +194,38 @@ export default function About() {
               </ul>
             </div>
 
-            <a
-              href="https://www.youtube.com/@Madmecodes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-white transition-all"
-              style={{
-                background: 'linear-gradient(to right, #ffd700, #ffc107)',
-                boxShadow: '0 0 10px rgba(255, 215, 0, 0.4)',
-              }}
-            >
-              <IoLogoYoutube className="w-5 h-5" />
-              Visit Madmecodes Channel
-            </a>
+            <p className="text-sm text-neutral-700 italic">
+              Version1 Quiz is open source and community-driven. You can find the complete source code on GitHub and contribute to improve the platform!
+            </p>
+
+            <div className="flex gap-3">
+              <a
+                href="https://www.youtube.com/@Madmecodes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-white transition-all"
+                style={{
+                  background: 'linear-gradient(to right, #ffd700, #ffc107)',
+                  boxShadow: '0 0 10px rgba(255, 215, 0, 0.4)',
+                }}
+              >
+                <IoLogoYoutube className="w-5 h-5" />
+                Visit YouTube Channel
+              </a>
+              <a
+                href="https://github.com/madmecodes/version1quiz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-white transition-all"
+                style={{
+                  background: 'linear-gradient(to right, #000, #333)',
+                  boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
+                }}
+              >
+                <IoLogoGithub className="w-5 h-5" />
+                View on GitHub
+              </a>
+            </div>
           </div>
         </div>
       </div>
