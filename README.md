@@ -1,234 +1,237 @@
-# Version1 Quiz - Indie Hacker Learning Platform
+# Version1 Quiz
 
-**Master indie hacking through a 23-level interactive quiz curriculum.**
+Master indie hacking through a 23-level interactive quiz curriculum.
 
 A full-stack learning platform where aspiring indie hackers learn to build, deploy, and market their products. From Linux essentials to launching on Product Hunt, our curriculum covers the complete indie hacking journey.
 
-## 🎯 What's Inside
+## What's Inside
 
-- **23 Levels** of curated content: Technical Foundations (19), Indie Hacking (3), DSA Fundamentals (1)
-- **500+ Questions** covering: Linux, Networking, Frontend, Backend, DevOps, Deployment, and Marketing
-- **Interactive Quiz System** with instant feedback, explanations, and XP rewards
-- **User Progress Tracking** with leaderboard and achievement system
-- **Monorepo Architecture** for easy contribution and deployment
+- 23 Levels of curated content: Technical Foundations (19), Indie Hacking (3), DSA Fundamentals (1)
+- 500+ Questions covering: Linux, Networking, Frontend, Backend, DevOps, Deployment, and Marketing
+- Interactive Quiz System with instant feedback, explanations, and XP rewards
+- User Progress Tracking with leaderboard and achievement system
+- Monorepo Architecture for easy contribution
 
-## 🚀 Quick Start
+## Prerequisites
 
-### Prerequisites
-- Python 3.9+ (Backend)
-- Node.js 18+ (Frontend)
-- PostgreSQL 12+ (Database)
-- Docker & Docker Compose (Optional, recommended)
+Backend:
+- Docker Desktop (includes Docker and Docker Compose)
 
-### Setup (Docker - Easiest)
+Frontend:
+- Node.js 18 or higher
+- npm (comes with Node.js)
 
-```bash
-# Clone the repository
-git clone https://github.com/madmecodes/version1quiz.git
-cd version1quiz
+## Local Development Setup
 
-# Start the stack
-docker-compose up
+The platform uses Docker for the backend and npm for the frontend. Both run independently on your machine.
 
-# In another terminal, migrate database and populate data
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py indie_hacking_v1
+### Backend Setup
 
-# Access the app
-# Frontend: http://localhost:5173
-# Backend API: http://localhost:8000
-# Admin Panel: http://localhost:8000/admin
-```
+Open a terminal and navigate to the backend directory:
 
-### Setup (Local Development)
-
-#### Backend Setup
 ```bash
 cd backend
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Copy environment file and configure
-cp .env.example .env
-# Edit .env with your settings (DATABASE_URL, SECRET_KEY, etc.)
-
-# Run migrations
-python manage.py migrate
-
-# Create superuser for admin panel
-python manage.py createsuperuser
-
-# Populate curriculum data
-python manage.py indie_hacking_v1
-
-# Start server
-python manage.py runserver
+docker-compose up
 ```
 
-#### Frontend Setup
+This starts:
+- Django API server on http://localhost:8000
+- PostgreSQL database on localhost:5432
+
+In another terminal, run migrations and populate example data:
+
+```bash
+cd backend
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py seed_example_data
+```
+
+To create an admin user for managing data:
+
+```bash
+docker-compose exec web python manage.py createsuperuser
+```
+
+Then access the admin panel at http://localhost:8000/admin
+
+### Frontend Setup
+
+Open a new terminal and navigate to the frontend directory:
+
 ```bash
 cd frontend
-
-# Install dependencies
 npm install
-
-# Copy environment file
-cp .env.example .env
-# Edit .env with VITE_API_URL (e.g., http://localhost:8000)
-
-# Start development server
 npm run dev
 ```
 
-## 📊 Populating Data
+This starts the React development server on http://localhost:5173
 
-### Option 1: Automatic Curriculum (Recommended)
+Access the application at http://localhost:5173
+
+## Populating Data
+
+You have two options:
+
+### Option 1: Use Example Data (Recommended for Testing)
+
+The example seed data script creates 5 sample levels with 25 questions to help you understand the platform structure:
+
 ```bash
-docker-compose exec web python manage.py indie_hacking_v1
-```
-Populates all 23 levels with 500+ questions instantly.
-
-### Option 2: Add Specific Level
-```bash
-docker-compose exec web python manage.py indie_hacking_v1_part6  # Level 23 only
+cd backend
+docker-compose exec web python manage.py seed_example_data
 ```
 
-### Option 3: Admin Panel
-1. Go to `http://localhost:8000/admin`
-2. Login with superuser credentials
-3. Create Levels → Add Questions manually
-4. Manage Users and Progress
+This creates:
+- Linux Basics (5 questions)
+- Git & GitHub (5 questions)
+- JavaScript Fundamentals (5 questions)
+- React Basics (5 questions)
+- Django Basics (5 questions)
 
-## 🔧 Environment Configuration
+### Option 2: Add Data Manually via Admin Panel
 
-### Backend (.env.example)
-```env
-DEBUG=True
-SECRET_KEY=your-secret-key-here
-DATABASE_URL=postgresql://user:password@localhost:5432/v1quiz_db
-ALLOWED_HOSTS=localhost,127.0.0.1
-CORS_ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
-GOOGLE_OAUTH_CLIENT_ID=your-google-oauth-id
+1. Start the backend: `cd backend && docker-compose up`
+2. Create a superuser: `docker-compose exec web python manage.py createsuperuser`
+3. Go to http://localhost:8000/admin
+4. Login with your superuser credentials
+5. Create Levels and Questions manually
+
+## Environment Configuration
+
+### Backend
+
+The backend uses environment variables defined in `backend/docker-compose.yml`. For custom configuration, you can create a `.env` file in the backend directory using `backend/.env.example` as reference.
+
+Key variables:
+- DEBUG: Set to False in production
+- SECRET_KEY: Keep this secret
+- DATABASE_URL: Configured to use Docker PostgreSQL
+- ALLOWED_HOSTS: Add your domain
+- CORS_ALLOWED_ORIGINS: Add your frontend URL
+
+### Frontend
+
+The frontend communicates with the backend API. By default, it connects to http://localhost:8000/api
+
+You can optionally create a `.env` file in the frontend directory using `frontend/.env.example` as reference.
+
+## Project Structure
+
+```
+version1quiz/
+├── backend/
+│   ├── quiz/                    # Quiz levels and questions
+│   ├── users/                   # User authentication
+│   ├── leaderboard/             # Ranking system
+│   ├── v1quiz_backend/          # Django settings
+│   ├── docker-compose.yml       # Docker configuration
+│   ├── Dockerfile               # Backend container definition
+│   ├── requirements.txt          # Python dependencies
+│   └── manage.py                # Django management script
+│
+├── frontend/
+│   ├── src/
+│   │   ├── pages/               # Page components
+│   │   ├── components/          # Reusable components
+│   │   ├── services/            # API integration
+│   │   ├── context/             # State management
+│   │   └── main.jsx             # Entry point
+│   ├── package.json             # Node dependencies
+│   └── vite.config.js           # Vite configuration
+│
+└── README.md                    # This file
 ```
 
-### Frontend (.env.example)
-```env
-VITE_API_URL=http://localhost:8000/api
-```
+## Contributing
 
-## 🤝 Contributing
+We welcome contributions! Here's how to get started:
 
-We love contributions! Here's how to get started:
+1. Fork the repository on GitHub
 
-1. **Fork & Clone**
+2. Clone your fork:
    ```bash
    git clone https://github.com/yourusername/version1quiz.git
    cd version1quiz
    ```
 
-2. **Create a Branch**
+3. Create a branch for your feature:
    ```bash
    git checkout -b feature/your-feature-name
    ```
 
-3. **Make Changes**
-   - Backend changes: `backend/` folder
-   - Frontend changes: `frontend/` folder
-   - Follow existing code patterns
+4. Make your changes:
+   - Backend changes go in the `backend/` folder
+   - Frontend changes go in the `frontend/` folder
+   - Follow existing code patterns and conventions
 
-4. **Test Locally**
-   - Ensure all tests pass
-   - Test both backend and frontend
+5. Test locally:
+   - Start both backend and frontend as described above
+   - Test your changes thoroughly
 
-5. **Push & Create PR**
+6. Commit and push:
    ```bash
+   git add .
+   git commit -m "Description of your changes"
    git push origin feature/your-feature-name
    ```
-   Create a Pull Request with description of changes
+
+7. Create a Pull Request on GitHub with a clear description of your changes
 
 ### Contribution Ideas
-- Add more levels/questions
-- Improve UI/UX
-- Fix bugs
-- Optimize performance
+
+- Add more levels or questions to the curriculum
+- Improve the UI/UX design
+- Fix bugs or improve performance
 - Add tests
 - Improve documentation
 
-## 📚 Project Structure
+## Monorepo Structure
 
-```
-version1quiz/
-├── backend/              # Django REST API
-│   ├── quiz/            # Quiz questions and levels
-│   ├── users/           # Authentication and profiles
-│   ├── leaderboard/     # Rankings and progress
-│   └── manage.py
-├── frontend/            # React + Vite
-│   ├── src/
-│   │   ├── pages/      # Quiz, Results, Dashboard
-│   │   ├── components/ # Reusable UI components
-│   │   ├── services/   # API integration
-│   │   └── context/    # State management
-│   └── package.json
-├── docker-compose.yml   # Full stack setup
-└── README.md
-```
-
-## 🏗️ Monorepo Structure (Why?)
-
-Both backend and frontend are in the same repository for **ease of contribution**:
+This project uses a monorepo (both backend and frontend in one repository) to make contribution easier:
 - Clone once, get everything
-- Atomic commits across frontend & backend
-- Shared CI/CD pipeline
-- Single issue tracker
-- Easier collaboration
+- Make changes across backend and frontend in a single commit
+- Single issue tracker for all problems
+- Simplified onboarding for new contributors
 
-Deployment is still separate:
-- **Backend**: Railway or Render
-- **Frontend**: Vercel
-- Both pull from same GitHub repo using root directory settings
+While ideally backend and frontend could be separate repositories, keeping them together reduces friction for contributors and makes atomic commits easier.
 
-## 🚀 Deployment
+## Stopping the Application
 
-### Backend (Railway)
-```
-Root Directory: backend/
-Framework: Django
-Database: PostgreSQL (auto-created)
+Backend (Docker):
+```bash
+cd backend
+docker-compose down
 ```
 
-### Frontend (Vercel)
-```
-Root Directory: frontend/
-Framework: Vite
-Build Command: npm run build
-```
+Frontend:
+Press Ctrl+C in the terminal running npm run dev
 
-See [Deployment Guide](DEPLOYMENT.md) for detailed instructions.
+## Troubleshooting
 
-## 📝 License
+Backend won't start:
+- Ensure Docker Desktop is running
+- Check if ports 5432 and 8000 are not in use
+- Run `docker-compose logs` for error details
 
-This project is open source and available under the MIT License.
+Frontend won't start:
+- Ensure Node.js 18+ is installed: `node --version`
+- Delete node_modules and reinstall: `rm -rf node_modules && npm install`
+- Check if port 5173 is in use
 
-## 🙏 Acknowledgments
+Database issues:
+- Restart Docker: `docker-compose down && docker-compose up`
 
-Built with:
-- Django & Django REST Framework
-- React & Vite
-- PostgreSQL
-- TailwindCSS
+## License
 
-## 📞 Support
+MIT License - feel free to use this project for learning and commercial purposes.
 
-- Found a bug? Open an [Issue](https://github.com/madmecodes/version1quiz/issues)
-- Have a question? Start a [Discussion](https://github.com/madmecodes/version1quiz/discussions)
-- Want to contribute? See [Contributing](#-contributing)
+## Support
+
+Found a bug? Have a question? Want to contribute?
+- Open an issue on GitHub
+- Check existing issues for solutions
+- Create a discussion for questions
 
 ---
 
-**Happy Learning & Building! 🚀**
+Happy Learning!
