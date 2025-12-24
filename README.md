@@ -1,10 +1,15 @@
 # Version1 Quiz
 
+
+
 Master indie hacking through a 23-level interactive quiz curriculum.
 
 A full-stack learning platform where aspiring indie hackers learn to build, deploy, and market their products. From Linux essentials to launching on Product Hunt, our curriculum covers the complete indie hacking journey.
 
 ## What's Inside
+
+https://github.com/user-attachments/assets/08b8209d-114d-4f1a-89f1-5135c94ef82c
+
 
 - 23 Levels of curated content: Technical Foundations (19), Indie Hacking (3), DSA Fundamentals (1)
 - 500+ Questions covering: Linux, Networking, Frontend, Backend, DevOps, Deployment, and Marketing
