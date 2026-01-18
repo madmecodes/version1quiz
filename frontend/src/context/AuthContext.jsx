@@ -46,16 +46,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setIsLoading(true);
 
-      console.log('='.repeat(50));
-      console.log('GOOGLE OAUTH DEBUG - Frontend');
-      console.log('credentialResponse:', credentialResponse);
-      console.log('credential (first 50 chars):', credentialResponse.credential?.substring(0, 50) + '...');
-      console.log('credential length:', credentialResponse.credential?.length);
-
       const response = await authAPI.googleLogin(credentialResponse.credential);
-
-      console.log('Backend response received:', response);
-      console.log('='.repeat(50));
 
       localStorage.setItem('authToken', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
@@ -65,13 +56,7 @@ export const AuthProvider = ({ children }) => {
 
       return response;
     } catch (error) {
-      console.error('='.repeat(50));
-      console.error('Login failed ERROR:');
       console.error('Error message:', error.message);
-      console.error('Error response:', error.response?.data);
-      console.error('Error status:', error.response?.status);
-      console.error('Full error:', error);
-      console.error('='.repeat(50));
       throw error;
     } finally {
       setIsLoading(false);
